@@ -2,11 +2,13 @@ package ru.bstu.vt41.bli.thridandroidapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.sql.Time;
 import java.util.ArrayList;
@@ -20,7 +22,8 @@ public class MainFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        setListAdapter(new AdapterListView(getActivity(), posts));
+        //установка адаптера для списка
+        this.setListAdapter(new AdapterListView(getActivity(), posts));
 
         return view;
     }
