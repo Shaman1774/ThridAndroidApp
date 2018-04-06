@@ -26,7 +26,9 @@ public class DetailFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        //Проверка реализует ли контекст(активити, в котором находится фрагмент) интерфейс OnFragmentPostListener
         try {
+            //Приводим к типу интерфейса OnFragmentPostListener наш контекст
             mListener = (OnFragmentPostListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
@@ -37,10 +39,12 @@ public class DetailFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //Вызываем метод получения поста
         Post post = mListener.onFragmentPost();
         setViewData(post);
     }
-
+    
+    //Интерфейс для получения данных из активити
     public interface OnFragmentPostListener {
 
         Post onFragmentPost();
