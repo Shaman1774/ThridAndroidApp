@@ -30,9 +30,13 @@ public class MainFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
+        //Намерение для старта DetailActivity
         Intent intent = new Intent(getActivity().getApplicationContext(), DetailActivity.class);
+        //Получение поста по позиции
         Post post = posts.get(position);
+        //Сохраняем данные в интент по ключу/id "post"
         intent.putExtra("post", post);
+        //Стартуем активити DetailActivity
         startActivity(intent);
     }
 
