@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 public class DetailFragment extends Fragment {
 
-    private OnFragmentPostListener mListener;
+    private OnDetailFragmentPostListener mListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -26,11 +26,11 @@ public class DetailFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        try {
-            mListener = (OnFragmentPostListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()
-                    + " должен реализовывать интерфейс OnFragmentPostListener");
+        if (context instanceof OnDetailFragmentPostListener) {
+            mListener = (OnDetailFragmentPostListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnDetailFragmentPostListener");
         }
     }
 
@@ -41,7 +41,7 @@ public class DetailFragment extends Fragment {
         setViewData(post);
     }
 
-    public interface OnFragmentPostListener {
+    public interface OnDetailFragmentPostListener {
 
         Post onFragmentPost();
     }

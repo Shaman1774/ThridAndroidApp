@@ -3,7 +3,7 @@ package ru.bstu.vt41.bli.thridandroidapp;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public class DetailActivity extends AppCompatActivity implements DetailFragment.OnFragmentPostListener {
+public class DetailActivity extends AppCompatActivity implements DetailFragment.OnDetailFragmentPostListener {
 
     private Post post;
 

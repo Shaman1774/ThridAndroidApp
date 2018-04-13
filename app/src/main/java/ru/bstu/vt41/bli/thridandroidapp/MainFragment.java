@@ -1,5 +1,6 @@
 package ru.bstu.vt41.bli.thridandroidapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import java.util.List;
 public class MainFragment extends ListFragment {
 
     List<Post> posts = getPosts();
+    private OnMainFragmentPostListener mListener;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,11 +31,21 @@ public class MainFragment extends ListFragment {
     }
 
     @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnMainFragmentPostListener) {
+            mListener = (OnMainFragmentPostListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnMainFragmentPostListener");
+        }
+    }
+
+    @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Intent intent = new Intent(getActivity().getApplicationContext(), DetailActivity.class);
         Post post = posts.get(position);
-        intent.putExtra("post", post);
-        startActivity(intent);
+        //Посылаем данные через интерфейс в MainActivity
+        mListener.onFragmentPost(post);
     }
 
     // набор данных, которые свяжем со списком
@@ -161,5 +173,10 @@ public class MainFragment extends ListFragment {
         );
 
         return posts;
+    }
+
+    public interface OnMainFragmentPostListener {
+
+        void onFragmentPost(Post post);
     }
 }
